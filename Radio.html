@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>FM Trianlge Calculator</title>
+<title>FM scan</title>
 
 
 
@@ -46,7 +46,8 @@ function init(){
 	//offset between the calculated ratio and the intended ratio
 		myBrains = 0; 
 		mySeek = 0;
-		pointA = Number(document.getElementById("mainAxis").value)-1;
+		pointA = 0;
+//		pointA = Number(document.getElementById("mainAxis").value)-1;
 	//#######
 	//
 		theInput1 = Math.abs(Number(document.getElementById("ratio1").value));
@@ -152,13 +153,34 @@ for(g=0; g<3; g++){
 
 
 <body>
-<h1>FM Triangle Calculator</h1>
-<h2>Input both values of a fraction, for a number between zero and one</h2>
+<h1>Values offset must match a segment</h1>
+<div style="margin:auto">
+<p>Select main axis</p>
 <form>
-<input type="text" id="ratio1"></input>
-<input type="text" id="ratio2"></input>
+<select id="mainAxis">
+ <option value = "1">885</option>
+ <option value = "2">893</option>
+ <option value = "3">903</option>
+ <option value = "4">913</option>
+ <option value = "5">919</option>
+ <option value = "6">925</option>
+ <option value = "7">935</option>
+ <option value = "8">943</option>
+ <option value = "9">951</option>
+ <option value = "10">959</option>
+ <option value = "11">977</option>
+ <option value = "12">985</option>
+ <option value = "13">995</option>
+ <option value = "14">1007</option>
+ <option value = "15">1029</option>
+ <option value = "16">1057</option>
+ <option value = "17">1073</option>
+</select>
 <br>
 <input type="button" value="Calculate" onClick="init()"></input>
+<p>Input ratio</p>
+<input type="text" id="ratio1"></input>
+<input type="text" id="ratio2"></input>
 </form>
 <table><tr>
 <td>Quality 1</td>
@@ -180,5 +202,6 @@ for(g=0; g<3; g++){
 <td>Axis</td>
 <td><p id="mainOutput6"></p></td>
 </tr></table>
+</div>
 </body>
 </html>
