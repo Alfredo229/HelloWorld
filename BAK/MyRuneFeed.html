@@ -1,0 +1,282 @@
+<html>
+
+<meta charset="utf-8">
+
+<head>
+<title>Live Rune Reading</title>
+<script src="RuneFunctions.js"></script>
+<script src="random.js"></script>
+<script src="PickRunes.js"></script>
+</head>
+
+<body>
+
+<div id="container" style="margin:auto">
+<table align="center" width=100% border=0><td align="center">
+
+<h1>Live Rune reading</h1>
+
+<p>This is a live rune reading. It runs cycles which you can customize and looks for a match. You can click an image for a quote from the original texts about that rune. It would be easier to learn on the manual rune reading.</p>
+
+<table><form><tr>
+
+<td>Cycle A</td>
+<td><input id="field10" type="text" value="730"></td>
+
+<td>Value 1</td>
+<td><input id="field30" type="text" value="System Used"></td>
+
+</tr><tr>
+
+<td>Cycle B</td>
+<td><input id="field20" type="text" value="1374"></td>
+
+<td>Value 2</td>
+<td><input id="field40" type="text" value="System Used"></td>
+
+</tr><tr>
+
+<td>Cycle C</td>
+<td><input id="field25" type="text" value=""></td>
+
+<td>Value 3</td>
+<td><input id="field50" type="text" value="System Used"></td>
+
+</tr><tr>
+
+<td>Activate Cycle C</td>
+<td><input type="checkbox" id="optionA"></td>
+
+<td>Picture set</td>
+<td><select id="pictureType">
+ <option value = "S">Symbol</option>
+ <option value = "P1">Picture set 1</option>
+ <option value = "P2">Picture set 2</option>
+ <option value = "P3">Picture set 3</option>
+ <option value = "P4">Picture set 4</option>
+ <option value = "P5">Picture set 5</option>
+ <option value = "P6">Picture set 6</option>
+ <option value = "P7">Picture set 7</option>
+ <option value = "P8">Picture set 8</option>
+ <option value = "P9">Picture set 9</option>
+ <option value = "P10">Picture set 10</option>
+ <option value = "P11">Picture set 11</option>
+ <option value = "P12">Picture set 12</option>
+ <option value = "P13">Picture set 13</option>
+ <option value = "P14">Picture set 14</option>
+ <option value = "P15">Picture set 15</option>
+ <option value = "P16">Picture set 16</option>
+ <option value = "P17">Picture set 17</option>
+ <option value = "P18">Picture set 18</option>
+</select></td>
+
+</tr></form></table>
+
+<table><form><tr>
+
+<td><input type="button" value="Ready" onClick="initA()"></td>
+
+<td><input type="button" value="Clear" onClick="clearIt()"></td>
+
+</tr></form></table>
+
+
+<p id="defenition3"></p>
+<p id="defenition2"></p>
+<p id="defenition1"></p>
+
+<table cellSpacing=2>
+
+<tr>
+<td>
+<img src="Runes/blank.jpg" width=200 id="image0" onClick="addDescription(0)">
+</td>
+
+<td>
+<img src="Runes/blank.jpg" width=200 id="image1" onClick="addDescription(1)">
+</td>
+
+<td>
+<img src="Runes/blank.jpg" width=200 id="image2" onClick="addDescription(2)">
+</td>
+
+</tr><tr>
+
+<td>
+<p id="text0"></p>
+</td>
+
+<td>
+<p id="text1"></p>
+</td>
+
+<td>
+<p id="text2"></p>
+</td>
+
+</tr></table>
+
+</td></table>
+
+<br><br><br><br>
+
+</div>
+</body>
+
+<script type="text/javascript">
+
+//***********VARIABLES******************
+
+var rune = new Array();
+var myPath="Runes\\";
+
+var cycleA = 0;
+var cycleB = 0;
+var cycleC = 0;
+
+var ID1 = 0;
+var ID2 = 0;
+var ID3 = 0;
+
+var running = 0;
+
+optionChecked = false;
+
+var Current_Rune = new Array(24,24,24);
+max_buffered = 3;
+
+pull = 0;
+
+defenitionBuffer = new Array(99,99,99);
+
+//****************************FUNCTIONS***********************************
+
+function loadImages(){
+ myNames = new Array("01","02","03","04","05","06","07","08","09","10",
+ "11","12","13","14","15","16","17","18","19","20","21","22","23","24");
+
+ myPath = "Pictures17\\";
+
+ for(i=0 ; i < 24 ; i++){
+  rune[i] = new Image();
+  rune[i].src = myPath + myNames[i]+".jpg";
+}}
+
+function initA(){
+ if(running == 0){
+  running = 1;
+  cycleA = document.getElementById("field10").value;
+  cycleB = document.getElementById("field20").value;
+  cycleC = document.getElementById("field25").value;
+  optionChecked = document.getElementById("optionA").checked;
+
+  PickRune(document.getElementById("pictureType").value);
+  loadImages();
+
+  change1();
+  change2();
+  if(optionChecked)
+   change3();
+ }else{
+  running = 0;
+  stop_run();
+}}
+
+function bufferMore(){
+ if(max_buffered < 7){
+  document.getElementById("image"+max_buffered).style.visibility="visible";
+  document.getElementById("text"+max_buffered).style.visibility="visible";
+  max_buffered++;
+ }
+}
+
+function bufferLess(){
+ if(max_buffered > 1){
+  max_buffered--;
+  document.getElementById("image"+max_buffered).style.visibility="hidden";
+  document.getElementById("text"+max_buffered).style.visibility="hidden";
+ }
+}
+
+function clearIt(){
+ for(i = 0; i < max_buffered; i++){
+  document.getElementById("image"+i).src = "Runes/blank.jpg";
+  document.getElementById("text"+i).innerHTML="";
+ }
+ for(i = 1; i <= 3; i++){
+  document.getElementById("defenition"+i).innerHTML="";
+  defenitionBuffer[i-1]=99;
+ }
+ for(i = 0; i < max_buffered; i++)
+  Current_Rune[i]=24;
+}
+
+function stop_run(){
+ window.clearTimeout(ID1);
+ window.clearTimeout(ID2);
+ window.clearTimeout(ID3);
+}
+
+function change1(){
+ ID1=setTimeout("change1();",cycleA);
+ document.getElementById("field30").value = Random(24);
+ validate();
+}
+
+function change2(){
+ ID2=setTimeout("change2();",cycleB);
+ document.getElementById("field40").value = Random(24);
+ validate();
+}
+
+function change3(){
+ ID3 = setTimeout("change3()",cycleC);
+ document.getElementById("field50").value = Random(24);
+ validate();
+}
+
+function validate(){
+ if(optionChecked)
+  if((document.getElementById("field30").value == document.getElementById("field40").value) && (document.getElementById("field30").value == document.getElementById("field50").value)){
+  }else{
+   return("");
+  }
+ if(document.getElementById("field30").value == document.getElementById("field40").value){
+  pull = Number(document.getElementById("field40").value);
+  move_index(pull);
+  printOutput(pull);
+ }
+}
+
+function printOutput(myMatch){
+ for(i = 0 ; i < max_buffered ; i++){
+  temp=Current_Rune[i];
+  if(temp==24){
+   document.getElementById("image"+i).src = "Runes/blank.jpg";
+   document.getElementById("text"+i).innerHTML="";
+  }else{
+   document.getElementById("image"+i).src = rune[temp].src;
+   document.getElementById("text"+i).innerHTML=name2[temp];
+  }
+ }
+}
+
+function addDescription(myRune){
+ for(i=2; i>0; i--){
+  defenitionBuffer[i]=defenitionBuffer[i-1];
+ }
+ defenitionBuffer[0]=Current_Rune[myRune];
+ for(i=0; i<3; i++){
+  if(defenitionBuffer[i] != 99)
+   document.getElementById("defenition"+(i+1)).innerHTML = line[defenitionBuffer[i]];
+ }
+}
+
+function move_index(match){
+ for(i = max_buffered - 1;i > 0;i--)
+  Current_Rune[i]=Current_Rune[i-1];
+ Current_Rune[0] = match;
+}
+
+</script>
+</html>

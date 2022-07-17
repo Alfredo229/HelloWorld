@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Prime number finder</title>
+
+</head>
+<body>
+<div style="margin:auto">
+<h1>Prime number finder</h1>
+<h2>This app will scrub up to and inctuding the number in the box. If the number it is processing can be divided to the same value as the rounded same division by one of the number already added it is rejected. Otherwise it is added and is a prime. The process rejects numbers not greater than one, floats and strings. Tested up to 100k input field, lags a bit but it gets there. Have fun :)</h2>
+<br>
+<form>
+<input type="text" id="field01"></input>
+<input type="button" onClick="init()" value="Clicky"></input>
+</form>
+<p id="myOutput">NULL</p>
+</div>
+</body>
+<script>
+maxValue = 0;
+primeBuffer = new Array();
+myIndex = 0;
+
+function init(){
+ maxValue=Number(document.getElementById("field01").value);
+ if(maxValue>1)
+  makeString();
+  printOutput();
+}
+
+function makeString(){
+ myIndex = 0;
+ primeBuffer = new Array();
+ for(t=2; t<=maxValue; t++){
+  if(checkBuffer(t)){
+   primeBuffer[myIndex] = new Number(t);
+   myIndex++;
+  }
+ }
+}
+
+function checkBuffer(myValue){
+ for(i=0; i<primeBuffer.length; i++){
+  if(myValue / primeBuffer[i] == Math.round(myValue / primeBuffer[i])){
+   return(false);
+  }
+ }
+ return(true);
+}
+
+function printOutput(){
+ myString = "Prime Numbers: ";
+ for(i=0; i<primeBuffer.length; i++){
+  myString += primeBuffer[i] + ", ";
+ }
+ document.getElementById("myOutput").innerHTML = myString;
+}
+</script>
+</html>

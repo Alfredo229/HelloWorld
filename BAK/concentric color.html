@@ -1,0 +1,179 @@
+<html>
+<head>
+<title>Three color circles</title>
+<script>
+
+//Full cycle length
+UNIT = 8;
+FACTOR = 2;
+//COLOR = 192;
+STEPPING = 2;
+
+loop01 = 0;
+loop02 = 0;
+loop03 = 0;
+
+myRed = 0;
+myGreen = 0;
+myBlue = 0;
+
+redCap = 0;
+greenCap = 0;
+blueCap = 0;
+
+running = 0;
+
+function init(){
+ if(running == 0){
+ myRed = 0;
+ myGreen = 0;
+ myBlue = 0;
+
+ COLOR = document.getElementById("MyColor").value;
+
+ FACTOR1 = Number(document.getElementById("field01").value);
+ FACTOR2 = Number(document.getElementById("field03").value);
+ FACTOR3 = Number(document.getElementById("field05").value);
+
+ INTEGER1 = Number(document.getElementById("field02").value);
+ INTEGER2 = Number(document.getElementById("field04").value);
+ INTEGER3 = Number(document.getElementById("field06").value);
+
+ loop1 = Math.floor(INTEGER1 / (FACTOR1/100));
+ loop2 = Math.floor(INTEGER2 / (FACTOR1/100));
+ loop3 = Math.floor(INTEGER3 / (FACTOR1/100));
+
+/*
+ loop1 = Math.floor(FACTOR1 / INTEGER1);
+ loop2 = Math.floor(FACTOR2 / INTEGER2);
+ loop3 = Math.floor(FACTOR3 / INTEGER3);
+*/
+
+/* loop1 = INTEGER1 * (100 / FACTOR1);
+ loop2 = INTEGER2 * (100 / FACTOR2);
+ loop3 = INTEGER3 * (100 / FACTOR3);
+*/
+
+/* loop2 = FACTOR2 * (100 / INTEGER2);
+ loop3 = FACTOR3 * (100 / INTEGER3);
+
+*/
+
+ alert(loop1 + ' ' + loop2 + ' ' + loop3);
+
+/*
+ loop1 = Math.floor((COLOR / UNIT) / (Number(document.getElementById("field01").value) / Number(document.getElementById("field02").value)));
+ loop2 = Math.floor((COLOR / UNIT) / (Number(document.getElementById("field03").value) / Number(document.getElementById("field04").value)));
+ loop3 = Math.floor((COLOR / UNIT) / (Number(document.getElementById("field05").value) / Number(document.getElementById("field06").value)));
+
+*/
+
+  running = 1;
+  setTimeout(runLoop1,9);
+  setTimeout(runLoop2,25);
+  setTimeout(runLoop3,49);
+/*  runLoop2();
+  runLoop3();
+*/
+}}
+
+function runLoop1(){
+ ID1 = setTimeout("runLoop1()",loop1*FACTOR);
+ updateBg();
+ if(redCap == 0){
+  myRed += STEPPING;
+  if(myRed >= COLOR){
+   myRed = COLOR;
+   redCap = 1;
+ }}else{
+  myRed -= STEPPING;
+  if(myRed <= 0){
+   myRed = 0;
+   redCap = 0;
+}}}
+
+function runLoop2(){
+ ID2 = setTimeout("runLoop2()",loop2*FACTOR);
+ updateBg();
+ if(greenCap == 0){
+  myGreen += STEPPING;
+  if(myGreen >= COLOR){
+   myGreen = COLOR;
+   greenCap = 1;
+ }}else{
+  myGreen -= STEPPING;
+  if(myGreen <= 0){
+   myGreen = 0;
+   greenCap = 0;
+}}}
+
+function runLoop3(){
+ ID3 = setTimeout("runLoop3()",loop3*FACTOR);
+ updateBg();
+ if(blueCap == 0){
+  myBlue += STEPPING;
+  if(myBlue >= COLOR){
+   myBlue = COLOR;
+   blueCap = 1;
+ }}else{
+  myBlue -= STEPPING;
+  if(myBlue <= 0){
+   myBlue = 0;
+   blueCap = 0;
+}}}
+
+function updateBg(){
+ number1 = myRed.toString(16);
+ number2 = myGreen.toString(16);
+ number3 = myBlue.toString(16);
+
+ if(number1.length == 1)
+  number1 = '0' + number1;
+ if(number2.length == 1)
+  number2 = '0' + number2;
+ if(number3.length == 1)
+  number3 = '0' + number3;
+
+ document.body.style.backgroundColor = '#' + number1 + number2 + number3;
+}
+
+function stop(){
+ if(running == 1);{
+  clearTimeout(ID1);
+  clearTimeout(ID2);
+  clearTimeout(ID3);
+  running = 0;
+}}
+
+</script>
+<body>
+<form>
+Red 
+<br>
+Factor 1
+<input type="text" id="field01" value="100"></input>
+Length 1
+<input type="text" id="field02"></input>
+<br>
+Green 
+<br>
+Factor 2
+<input type="text" id="field03" value="100"></input>
+Length 2
+<input type="text" id="field04"></input>
+<br>
+Blue 
+<br>
+Factor 3
+<input type="text" id="field05" value="100"></input>
+Length 3
+<input type="text" id="field06"></input>
+<br>
+Brightness
+<input type="field" value="255" id="MyColor"></input>
+<br>
+<input type="button" value="Run" onClick="init()"></input>
+<input type="button" value="Stop" onClick="stop()"></input>
+</form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Test Random</title>
+<script src=Random.js></script>
+<script>
+myArray = new Array(0,0,0);
+function testIt(){
+ for(i=0; i<500; i++){
+  myArray[Random(3)]++;
+ }
+ document.getElementById("myField").innerHTML = (myArray[0] + ' ' + myArray[1] + ' ' + myArray[2]);
+}
+</script>
+</head>
+<body>
+<form>
+<input value="Run Test" type="button" onClick="testIt()"></input>
+</form>
+<p id="myField"></p>
+</body>
+</html>
