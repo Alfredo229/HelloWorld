@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>Rune traditionnal spread</title>
+<script src="PickRunes.js"></script>
+<script src="RuneFunctions.js"></script>
+<script>
+function init(){
+ myPath="";
+ PickRune(document.getElementById("pictureType").value);
+ for(i=1;i<=24;i++){
+  myString = new String(i);
+  if(i < 10)
+   myString = "0" + myString;
+  document.getElementById("image"+i).src = myPath + myString + ".jpg";
+  document.getElementById("text"+i).innerHTML = name2[i-1];
+ }
+}
+</script>
+</head>
+<body>
+Picture set
+<select id="pictureType">
+ <option value = "S">Symbol</option>
+ <option value = "P1">Picture set 1</option>
+ <option value = "P2">Picture set 2</option>
+ <option value = "P3">Picture set 3</option>
+ <option value = "P4">Picture set 4</option>
+ <option value = "P5">Picture set 5</option>
+ <option value = "P6">Picture set 6</option>
+ <option value = "P7">Picture set 7</option>
+ <option value = "P8">Picture set 8</option>
+ <option value = "P9">Picture set 9</option>
+ <option value = "P10">Picture set 10</option>
+ <option value = "P11">Picture set 11</option>
+ <option value = "P12">Picture set 12</option>
+ <option value = "P13">Picture set 13</option>
+ <option value = "P14">Picture set 14</option>
+ <option value = "P15">Picture set 15</option>
+ <option value = "P16">Picture set 16</option>
+ <option value = "P17">Picture set 17</option>
+ <option value = "P18">Picture set 18</option>
+ <option value = "P19">Picture set 19</option>
+ <option value = "P20">Picture set 20</option>
+ <option value = "P21">Picture set 21</option>
+ <option value = "P22">Picture set 22</option>
+ <option value = "P23">Picture set 23</option>
+ <option value = "P24">Picture set 24</option>
+ <option value = "P25">Picture set 25</option>
+ <option value = "P26">Picture set 26</option>
+ <option value = "P27">Picture set 27</option>
+ <option value = "P28">Picture set 28</option>
+ <option value = "P29">Picture set 29</option>
+</select>
+<input type="button" value="Click" onClick="init()">
+<table><tr>
+<td>
+<img id="image1" width="162" src="Runes/01.jpg">
+<p id="text1"></p>
+</td><td>
+<img id="image2" width="162" src="Runes/02.jpg">
+<p id="text2"></p>
+</td><td>
+<img id="image3" width="162" src="Runes/03.jpg">
+<p id="text3"></p>
+</td><td>
+<img id="image4" width="162" src="Runes/04.jpg">
+<p id="text4"></p>
+</td><td>
+<img id="image5" width="162" src="Runes/05.jpg">
+<p id="text5"></p>
+</td><td>
+<img id="image6" width="162" src="Runes/06.jpg">
+<p id="text6"></p>
+</td><td>
+<img id="image7" width="162" src="Runes/07.jpg">
+<p id="text7"></p>
+</td><td>
+<img id="image8" width="162" src="Runes/08.jpg">
+<p id="text8"></p>
+</td></tr><tr><td>
+<img id="image9" width="162" src="Runes/09.jpg">
+<p id="text9"></p>
+</td><td>
+<img id="image10" width="162" src="Runes/10.jpg">
+<p id="text10"></p>
+</td><td>
+<img id="image11" width="162" src="Runes/11.jpg">
+<p id="text11"></p>
+</td><td>
+<img id="image12" width="162" src="Runes/12.jpg">
+<p id="text12"></p>
+</td><td>
+<img id="image13" width="162" src="Runes/13.jpg">
+<p id="text13"></p>
+</td><td>
+<img id="image14" width="162" src="Runes/14.jpg">
+<p id="text14"></p>
+</td><td>
+<img id="image15" width="162" src="Runes/15.jpg">
+<p id="text15"></p>
+</td><td>
+<img id="image16" width="162" src="Runes/16.jpg">
+<p id="text16"></p>
+</td></tr><tr><td>
+<img id="image17" width="162" src="Runes/17.jpg">
+<p id="text17"></p>
+</td><td>
+<img id="image18" width="162" src="Runes/18.jpg">
+<p id="text18"></p>
+</td><td>
+<img id="image19" width="162" src="Runes/19.jpg">
+<p id="text19"></p>
+</td><td>
+<img id="image20" width="162" src="Runes/20.jpg">
+<p id="text20"></p>
+</td><td>
+<img id="image21" width="162" src="Runes/21.jpg">
+<p id="text21"></p>
+</td><td>
+<img id="image22" width="162" src="Runes/22.jpg">
+<p id="text22"></p>
+</td><td>
+<img id="image23" width="162" src="Runes/23.jpg">
+<p id="text23"></p>
+</td><td>
+<img id="image24" width="162" src="Runes/24.jpg">
+<p id="text24"></p>
+</tr></table>
+</div>
+</body></html>

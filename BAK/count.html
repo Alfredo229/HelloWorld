@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Calculating sheet</title>
+<script>
+
+function run(){
+ mainAxis = Number(document.getElementById("myAnchor").value);
+
+ switch(document.getElementById("selectedAxis").value){
+  case "01":
+   selection = Number(document.getElementById("axis01").value);
+   factor = Number(document.getElementById("ratio01").value);
+   break;
+  case "02":
+   selection = Number(document.getElementById("axis02").value);
+   factor = Number(document.getElementById("ratio02").value);
+   break;
+  case "03":
+   selection = Number(document.getElementById("axis03").value);
+   factor = Number(document.getElementById("ratio03").value);
+   break;
+  case "04":
+   selection = Number(document.getElementById("axis04").value);
+   factor = Number(document.getElementById("ratio04").value);
+   break;
+ }
+
+ mainRatio = mainAxis - selection;
+ mainRatio *= factor;
+
+ for(i=1 ;i<=4; i++){
+  document.getElementById("axis0"+i).value = Math.abs( mainAxis - (mainRatio / document.getElementById("ratio0"+i).value));
+ }
+}
+
+</script>
+</head>
+<body>
+<div style="margin:auto">
+<form>
+<table align="center"><tr>
+
+<td>Anchor</td>
+<td><input id="myAnchor" type="text"></input></td>
+</tr><tr>
+
+<td>Field 1</td>
+<td><input type="text" id="axis01"></input></td>
+<td>Ratio 1</td>
+<td><input type="text" id="ratio01"></input></td>
+</tr><tr>
+
+<td>Field 2</td>
+<td><input type="text" id="axis02"></input></td>
+<td>Ratio 2</td>
+<td><input type="text" id="ratio02"></input></td>
+</tr><tr>
+
+<td>Field 3</td>
+<td><input type="text" id="axis03"></input></td>
+<td>Ratio 3</td>
+<td><input type="text" id="ratio03"></input></td>
+</tr><tr>
+
+<td>Field 4</td>
+<td><input type="text" id="axis04"></input></td>
+<td>Ratio 4</td>
+<td><input type="text" id="ratio04"></input></td>
+</tr><tr>
+
+<td><select id="selectedAxis">
+ <option value = "01">Axis 1</option>
+ <option value = "02">Axis 2</option>
+ <option value = "03">Axis 3</option>
+ <option value = "04">Axis 4</option>
+</select></td>
+</tr><tr>
+
+<td><input type="button" value="Calcualte" onClick="run()"></input></td>
+</tr></table>
+</form>
+</div>
+</body>
+</html>

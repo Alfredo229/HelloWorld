@@ -1,0 +1,59 @@
+<html>
+<head><title>
+Relativity Cones
+</title>
+<script>
+
+MAXRUN = 0;
+ 
+function run(){
+ MAXRUN = Number(document.getElementById("max").value);
+ if(MAXRUN > 0)
+  MainResults = new Array;
+  index = 0;
+  process();
+}
+
+function process(){
+ check = 0;
+ for(MyLoop=1; MyLoop<MAXRUN/2; MyLoop++){
+  ValueA = MyLoop;
+  ValueB = MAXRUN - MyLoop;
+  found = 0;
+  for(factorCheck=2; factorCheck<ValueB; factorCheck++){
+   if(Number.isInteger(ValueB / factorCheck) && Number.isInteger(ValueA / factorCheck)){
+    found = 1;
+   }
+  }
+ if(found == 0)
+  addValue(ValueA,ValueB);
+ }
+ printOutput();
+}
+
+function addValue(ValueA, ValueB){
+ MainResults[index] = new Array;
+ MainResults[index][0] = ValueA;
+ MainResults[index][1] = ValueB;
+ index++;
+}
+
+function printOutput(){
+ myString = '';
+ for(i=0; i<index; i++){
+  myString = myString + "<br>" + MainResults[i][0] +" "+ MainResults[i][1]+" - "+(MainResults[i][1]-MainResults[i][0]);
+  document.getElementById("myDiv").innerHTML = myString;
+ }
+}
+
+</script></head>
+<body>
+<h1>The purpose of this file is to determine the non factorizable chords off a cone and to determine the width.</h1>
+<h2>if you input 7, you get 1 6, 2 5, 3 4. Those all add up to 7 and there are no common factors.</h2>
+<form>
+<input type="text" id="max"</input>
+<input type="button" onClick="run()" value="run"></input>
+</form>
+<p id="myDiv"></p>
+</body>
+</html>

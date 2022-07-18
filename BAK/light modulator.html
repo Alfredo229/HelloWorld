@@ -1,0 +1,132 @@
+<html>
+<head><title></title>
+<script>
+
+MYRED = 1000;
+MYYELLOW = 900;
+MYGREEN = 800;
+MYCYAN = 700;
+MYBLUE = 600;
+MYPURPLE = 500;
+REDLOOP = 400;
+
+value = MYRED;
+
+theDelay = 0;
+
+isRunning = 0;
+
+ID0 = 0;
+
+function init(){
+ theDelay = document.getElementById("field01").value;
+ if(isRunning == 1){
+  isRunning  = 0;
+  clearTimeout(ID0);
+ }
+ else{
+  isRunning = 1;
+  setbg();
+}}
+
+function setbg(){
+ ID0 = setTimeout("setbg();",theDelay);
+ found = 0;
+
+ red = 0;
+ green = 0;
+ blue = 0;
+
+ // pink - purple
+ if(value < MYPURPLE && found == 0){
+  red = 1;
+  green = 0;
+  blue = (value-REDLOOP) / (MYPURPLE - REDLOOP);
+  found = 1;
+ }
+
+ //purple - blue
+ if(value < MYBLUE && found == 0){
+  red = -1*(value-MYBLUE) / (MYBLUE - MYPURPLE);
+  green = 0;
+  blue = 1;
+  found = 1;
+ }
+
+ //blue - skyblue
+ if(value < MYCYAN && found == 0){
+  red = 0;
+  green = (value-MYBLUE) / (MYCYAN-MYBLUE);
+  blue = 1;
+  found = 1;
+ }
+
+ //skyblue - green
+ if(value < MYGREEN && found == 0){
+  red = 0;
+  green = 1;
+  blue = -1*(value-MYGREEN) / (MYGREEN-MYCYAN);
+  found = 1;
+ }
+
+ //green - yellow
+ if(value < MYYELLOW && found == 0){
+  red = (value-MYGREEN) / (MYYELLOW-MYGREEN);
+  green = 1;
+  blue = 0;
+  found = 1;
+ }
+
+ //yellow - red
+ if(value <= MYRED && found == 0){
+  red = 1;
+  green = -1*(value-MYRED) / (MYRED-MYYELLOW);
+  blue = 0;
+  found = 1;
+ }
+
+ //black (wtf!)
+ if(found == 0){
+  alert(value);
+  red = 0;
+  green = 0;
+  blue = 0;
+  found = 1;
+ }
+
+ value = value - 5;
+ if(value < REDLOOP)
+  value = MYRED;
+
+ red = Math.floor(red * 255);
+ green = Math.floor(green * 255);
+ blue = Math.floor(blue * 255);
+
+ color = numberPad();
+ document.bgColor = color;
+// document.getElementById("clicky").value = (value+"\n"+color);
+}
+
+function numberPad(){
+ ongoing = "";
+ if(red < 16)
+  ongoing += 0;
+ ongoing += red.toString(16);
+ if(green < 16)
+  ongoing += 0;
+ ongoing += green.toString(16);
+ if(blue < 16)
+  ongoing += 0;
+ ongoing += blue.toString(16);
+ return ongoing;
+}
+
+</script>
+</head>
+<body>
+<form>
+Cycle length
+<input type="text" id="field01"></input><br>
+<input type="button" value="Ready" onClick = "init()"></input>
+</body>
+</html>

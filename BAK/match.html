@@ -1,0 +1,247 @@
+<html>
+
+<head>
+<title>Coincidence scrubber</title>
+<script src="random.js"></script>
+</head>
+
+<body>
+
+<div id="container" style="margin:auto">
+<table align="center" width=100% border=0><td align="center">
+
+<h1>Coincidence scrubber</h1>
+
+<p>This is the coincidence engine i wrote after staring at a picture carousel for too long. Those two in a row kind of break the pace and i thought it was pretty special to get the same picture out of a thousand twice in a row.</p>
+<p>The script runs two cycles at different speeds. If the number comes up the same in an interval it's commited to results.</p>
+<p>Removed the goofy orbital ratios. It applies to a hertz model but translates badly here. Also i made the number scrubbing internal variables so it's faster, hopefully, and handles sub 10ms values better for 4 digit outputs (or more?)</p>
+<p>This is going to be fun, i want to make it possible as a criteria for it to match 3 numbers for a result. Oh this is hilarious, you have to realise the window for this to happen is very small so help yourself, if you do, and start with strong values.</p>
+<p>Ok, i realise this may seem completly useless to like 99% of humanity so here it goes... This is about a base 3 system, roughly. 
+Computers are base 2, no matter how many bits you add they're always going to be base 2. Starting from there i was doing my drawing thing, 
+looking for geometrical shapes to draw from the numbers i get here. Adjusting the cycles over hexadecimal systems, decimal systems, i developed 
+certain associations with the decimal digits. I'm not going to go over it it would sound quite crazy but roughly, what i ended up doing was 
+writing the numbers from 1 to 9 and circle 3 6 9. Looking at my sequence and with my crazy associations it became apparent that each "times 3" 
+had 2 neighbors and nothing in between. Those neighbors share some characteristics from my associations. Tried the same thing with "times 4" 
+and i drew some patterns from it in neighbors formations. This is harmless, it's for doing drawings. It's also fun.</p>
+
+<form name="myform">
+<table align="center">
+<tr>
+<td>Cycle A</td>
+<td><input id="field10" type="text"></td>
+<td>Cycle B</td>
+<td><input id="field20" type="text"></td>
+<td>Cycle C</td>
+<td><input id="field25" type="text"></td>
+</tr>
+
+<tr>
+<td>Minimum Value</td>
+<td><input id="field30" type="text"></td>
+<td>Maximum Value</td>
+<td><input id="field40" type="text"></td>
+</tr>
+
+<tr>
+<td>Quantity</td>
+<td><input id="field50" type="text"></td>
+<td>Activate Cycle C</td>
+<td><input type="checkbox" id="optionA"></td>
+</tr>
+
+<tr>
+<td>Status</td>
+<td><p id="status">Not running</p>
+</tr>
+
+<tr>
+<td>Remaining</td>
+<td><p id="remaining">null</p>
+</tr>
+</table>
+
+<table align="center">
+<tr>
+<td><input type="button" value="Ready" onClick="go()"></td>
+<td><input type="button" value="Stop" onClick="stop()"></td>
+<td><input type="button" value="Clear" onClick="DoRemove()"></td>
+<td><input type="button" value="Redraw Log" onClick="ListResults()"></td>
+</tr>
+
+<tr>
+<td colspan="4"><textarea rows="10" cols="13" id="match"></textarea></td>
+</tr>
+
+</table>
+</form>
+
+</td></table></div>
+
+</body><script type="text/javascript">
+//***************************************************SCRIPT HERE
+//this is an old file. it got rewritten many times...
+
+ cycleA = 0;
+ cycleB = 0;
+ cycleC = 0;
+ ID1 = 0;
+ ID2 = 0;
+ ID3 = 0;
+ valueA = 0;
+ valueB = 0;
+ valueC = 0;
+
+ optionState = false;
+
+ index = 0;
+
+ minimum = 0;
+ maximum = 0;
+ quantity = 0;
+
+ running = false;
+
+ pulled = new Array(1000);
+
+function Random(limit){
+//returns "limit" possible numbers including 0
+ value = Math.round(Math.random() * (limit + 1));
+ if(value == (limit + 1))
+  value = 0;
+ return value;
+}
+
+/*
+function changeFreq(){
+ switch(document.getElementById("dialog11").value){
+
+  case"0":
+   document.getElementById("field10").value="88";
+   document.getElementById("field20").value="225";
+   break;
+  case"1":
+   document.getElementById("field10").value="225";
+   document.getElementById("field20").value="365";
+   break;
+  case"2":
+   document.getElementById("field10").value="365";
+   document.getElementById("field20").value="687";
+   break;
+  case"3":
+   document.getElementById("field10").value="687";
+   document.getElementById("field20").value="4332";
+   break;
+ }
+}*/
+
+function init(){
+ minimum = Number(document.getElementById("field30").value);
+ maximum = Number(document.getElementById("field40").value);
+ quantity = Number(document.getElementById("field50").value);
+ valueA = 0;
+ valueB = 0;
+ index = 0;
+ for(i = 0 ; i < 1000 ; i++){
+  pulled[i] = 0;}
+ cycleA = document.myform.field10.value;
+ cycleB = document.myform.field20.value;
+ cycleC = document.myform.field25.value;
+}
+
+function go(){
+ if(!running){
+  init();
+  document.getElementById("remaining").innerHTML = quantity;
+  change1();
+  change2();
+  optionState = document.getElementById("optionA").checked;
+  if(optionState){
+   change3();
+  }
+  running = true;
+  document.getElementById("status").innerHTML = "Running";
+// validate(); // Useful??
+}}
+
+function stop(){
+ window.clearTimeout(ID1);
+ window.clearTimeout(ID2);
+ window.clearTimeout(ID3);
+ running = false;
+ document.getElementById("status").innerHTML = "Not Running";
+}
+
+function change1(){
+ ID1=setTimeout("change1();",cycleA);
+ pull = Random(maximum-minimum);
+ valueA = pull + minimum;
+ validate();
+}
+
+function change2(){
+ ID2=setTimeout("change2();",cycleB);
+ pull = Random(maximum-minimum);
+ valueB = pull + minimum;
+ validate();
+}
+
+function change3(){
+ ID3=setTimeout("change3();",cycleC);
+ pull = Random(maximum-minimum);
+ valueC = pull + minimum;
+ validate();
+}
+
+
+//i know this is dirty programming and my teacher would not be happy with me but i don't really care as i'm not shooting for nasa here.
+function validate(){
+ if(!optionState){
+  if(valueA == valueB){
+   pull = valueA;
+   found = 0;
+   for(i = 0 ; i < index ; i++)
+    if(pulled[i] == pull) 
+     found = 1;
+   if(found == 0){
+    pulled[index] = pull;
+    index++;
+    document.getElementById("match").value += valueA + "\n";
+    quantity--;
+    document.getElementById("remaining").innerHTML = quantity;
+    if(quantity <= 0)
+     stop();
+   }
+  }
+ }else{
+  if((valueA == valueB) && (valueA == valueC)){
+   pull = valueA;
+   found = 0;
+   for(i = 0 ; i < index ; i++)
+    if(pulled[i] == pull) 
+     found = 1;
+   if(found == 0){
+    pulled[index] = pull;
+    index++;
+    document.getElementById("match").value += valueA + "\n";
+    quantity--;
+    document.getElementById("remaining").innerHTML = quantity;
+    if(quantity <= 0)
+     stop();
+   }
+  }
+ }
+}
+
+function DoRemove(){
+ document.getElementById("match").value='';
+}
+
+function ListResults(){
+ document.getElementById("match").value = "";
+ for(i=0;i<index;i++)
+  document.getElementById("match").value += pulled[i] + "\n";
+}
+
+</script>
+
+</html>

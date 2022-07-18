@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>Color</title>
+<script>
+colorNames = new Array("RED","orange","yellow","green","cyan","blue","purple");
+function setColor(colorId){
+ document.body.style.backgroundColor = colorNames[colorId];
+}
+</script>
+</head>
+<body>
+<form><table><tr>
+<td><input type="button" value="Red" onClick="setColor(0)"></td>
+<td><input type="button" value="Orange" onClick="setColor(1)"></td>
+<td><input type="button" value="Yellow" onClick="setColor(2)"></td>
+<td><input type="button" value="Green" onClick="setColor(3)"></td>
+<td><input type="button" value="Cyan" onClick="setColor(4)"></td>
+<td><input type="button" value="Blue" onClick="setColor(5)"></td>
+<td><input type="button" value="Purple" onClick="setColor(6)"></td>
+</tr></table></form>
+</body>
+</html>

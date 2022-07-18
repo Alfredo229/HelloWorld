@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Manual rune reading (with symbol)</title>
+<script src="random.js"></script>
+<script src="RuneFunctions.js"></script>
+</head>
+
+<body>
+<div style="margin:auto">
+
+<div style="width:75%;margin:auto">
+<h1>Manual runic reading</h1>
+<h2>Instructions</h2>
+<p><font size="4">Pull a single rune and read the associated text. This is a question. You have to match it with whatever is real to you: emotions, thoughts, facts, etc... Then you pull another rune and you repeat the process. The message will complexify as you pull more runes, no need to pull all of them.</p>
+</div>
+
+<div style="width:75%;float:top;margin:auto">
+<form>
+<input type="button" value="Click" onClick="pickRune()">
+<input type="button" value="Erase" onClick="clearOutput()">
+<select id="pictureType">
+ <option value = "S">Symbol</option>
+ <option value = "P1">Picture set 1</option>
+ <option value = "P2">Picture set 2</option>
+ <option value = "P3">Picture set 3</option>
+ <option value = "P4">Picture set 4</option>
+</select>
+</form>
+</div>
+
+<table align="center">
+<tr>
+<td>
+<img id="rune01" src="Runes/blank.jpg" width=200></img>
+<p id="runeid01">Blank</p>
+</td><td>
+<img id="rune02" src="Runes/blank.jpg" width=200></img>
+<p id="runeid02">Blank</p>
+</td><td>
+<img id="rune03" src="Runes/blank.jpg" width=200></img>
+<p id="runeid03">Blank</p>
+</td>
+</tr></table><table align="center">
+<tr>
+<td>
+<img id="rune04" src="Runes/blank.jpg" width=200></img>
+<p id="runeid04">Blank</p>
+</td>
+<td>
+<img id="rune05" src="Runes/blank.jpg" width=200></img>
+<p id="runeid05">Blank</p>
+</td>
+
+</tr></table>
+
+<div style="width:75%;margin:auto;float:top">
+<p id="runetext01"></p>
+<p id="runetext02"></p>
+<p id="runetext03"></p>
+<p id="runetext04"></p>
+<p id="runetext05"></p>
+</div>
+
+</div>
+
+<script>
+//********************************************START
+//*********************************************Variables
+
+MAXRUNES = 5;
+
+var rune = new Array();
+var myPath="Runes\\";
+
+index = 0;
+picked = new Array(23);
+
+//************************************************Functions
+
+function loadImages(){
+ myNames = new Array("01","02","03","04","05","06","07","08","09","10",
+ "11","12","13","14","15","16","17","18","19","20","21","22","23","24");
+
+ for(i=0 ; i < 24 ; i++){
+  rune[i] = new Image();
+  rune[i].src = myPath + myNames[i]+".jpg";
+}}
+
+function printOutput(runeId){
+ if(index < MAXRUNES){
+  document.getElementById("rune0"+(index+1)).src = rune[runeId].src;
+  document.getElementById("runeid0"+(index+1)).innerHTML = name2[runeId];
+  document.getElementById("runetext0"+(index+1)).innerHTML = line[runeId];
+  index++;
+ }
+}
+
+function clearOutput(){
+ for(i=0; i<MAXRUNES; i++){
+  document.getElementById("rune0"+(i+1)).src = "Runes/blank.jpg";
+  document.getElementById("runeid0"+(i+1)).innerHTML = "Blank";
+  document.getElementById("runetext0"+(i+1)).innerHTML = "";
+  index=0;
+  picked= new Array(23);
+ }
+}
+
+function pickRune(){
+
+ switch(document.getElementById("pictureType").value){
+  case "S":
+   myPath = "Runes\\";
+   break;
+
+  case "P1":
+   myPath = "Pictures\\";
+   break;
+
+  case "P2":
+   myPath = "Pictures01\\";
+   break;
+
+  case "P3":
+   myPath = "Pictures02\\";
+   break;
+
+  case "P4":
+   myPath = "Pictures03\\";
+   break;
+
+  default:
+   alert("other");
+ }
+ loadImages();
+ 
+ if(index < MAXRUNES){
+  pointer = Random(23-index);
+  for(i=0; i <= pointer; i++){
+   if(picked[i] == 1)
+    pointer++;
+  }
+  picked[pointer] = 1;
+  printOutput(pointer);
+}}
+
+//************************************************END
+</script>
+</body>
+
+</html>

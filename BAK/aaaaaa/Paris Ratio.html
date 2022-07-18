@@ -1,0 +1,191 @@
+<html>
+<head>
+<title>FM scan</title>
+<script>
+
+frequencyList = new Array(878,882,886,890,894,899,904,909,913,917,921,926,928,931,935,939,943,948,952,956,960,964,969,974,978,982,986,988,990,995,999,1003,1007,1011,1015,1019,1023,1027,1031,1035,1039,1043,1047,1051,1055,1059,1063,1067,1071,1075,1077);
+favoriteList = new Array(913,935,943,969,995,1007,1051,1063);
+
+function init(){
+
+
+ //Resets variables
+ result = new Array(99,99,99);
+ resultIndexA = new Array(0,0,0);
+ resultIndexB = new Array(0,0,0);
+ resultIndexC = new Array(0,0,0);
+ testString = '';
+
+//offset between the calculated ratio and the intended ratio
+ myBrains = 0; 
+
+ mySeek = 0;
+
+ //loads form
+ pointA = Number(document.getElementById("mainAxis").value)-1;
+
+// currentRatio = Math.abs(Number(document.getElementById("ratio1").value) / Number(document.getElementById("ratio2").value));
+
+ theInput1 = Math.abs(Number(document.getElementById("ratio1").value));
+ theInput2 = Math.abs(Number(document.getElementById("ratio2").value));
+// theInput3 = math.abs(theRatio1-theRatio2);
+
+ theRatio1 = 1 / theInput1;
+ theRatio2 = 1 / theInput2;
+// theRatio1 = 1 / theInput3;
+
+// theRatio1 = Math.abs(theInput1 - theInput2);
+ //theRatio2 = Math.abs(theInput1 - theInput3);
+ //theRatio3 = Math.abs(theInput2 - theInput3);
+
+// if(currentRatio > 1)
+  //currentRatio = 1 / currentRatio;
+
+//*****************LOOP F
+for(f=0; f < favoriteList.length; f++){
+// alert(f+' '+favoriteList[f]);
+ pointA = f;
+
+//*********************LOOP I
+  for(i=0; i < frequencyList.length; i++){
+   offsetA = Math.abs((favoriteList[pointA] - frequencyList[i]));
+   targetOffset = offsetA * theRatio1;
+
+// alert(targetOffset);
+
+//**********************LOOP X
+   for(x=0 ;x < frequencyList.length ;x++){
+    if(i != x){
+    offsetB = Math.abs(favoriteList[pointA] - frequencyList[x]);
+    offsetB *= theRatio2;
+
+    calculatedOffset = Math.abs(targetOffset - offsetB);
+
+//alert(calculatedOffset);
+
+//     myBrains = Math.abs(currentRatio - mySeek);
+
+
+// if(f == 8)
+//  alert(i + ' ' +x + ' ' + calculatedOffset);
+   if(favoriteList[pointA] < frequencyList[i] && favoriteList[pointA] < frequencyList[x])
+     validate();
+ }}}
+
+//*******************
+
+ gg=favoriteList.length;
+
+//*********************LOOP I
+  for(i = 0 ; i < frequencyList.length; i++){
+   offsetA = Math.abs((favoriteList[pointA] - frequencyList[i]));
+   targetOffset = offsetA * theRatio1;
+
+//**********************LOOP X
+   for(x=0 ;x < frequencyList.length ;x++){
+    if(i != x){
+    offsetB = Math.abs(favoriteList[pointA] - frequencyList[x]);
+    offsetB *= theRatio2;
+
+     calculatedOffset = Math.abs(targetOffset - offsetB);
+ 
+   if(favoriteList[pointA] > frequencyList[i] && favoriteList[pointA] > frequencyList[x])
+     validate();
+  }}}
+}}
+
+function validate(){
+ //Sweeps the 5 result array and pushes down if there's a match
+ /*needs to swipe the array and keep pushing the higher numbers until... no
+ Start at the best result then push if it finds something higher (golf)*/
+
+ if(calculatedOffset < result[0]){
+//  alert(f);
+// alert(favoriteList[pointA] + ' ' + calculatedOffset);
+
+  for(g=2; g>0; g--){
+   result[g] = result[g-1]
+   resultIndexA[g] = resultIndexA[g-1];
+   resultIndexB[g] = resultIndexB[g-1];
+   resultIndexC[g] = resultIndexC[g-1];
+  }
+  result[0] = calculatedOffset;
+  resultIndexA[0] = x;
+  resultIndexB[0] = i;
+  resultIndexC[0] = pointA;
+}
+
+ //Prints the results
+ resultString = '';
+ frequencyA = '';
+ frequencyB = '';
+ frequencyC = '';
+ for(g=0; g<3; g++){
+  resultString += result[g] + ' ';
+  frequencyA += frequencyList[resultIndexA[g]] + ' ';
+  frequencyB += frequencyList[resultIndexB[g]] + ' ';
+  frequencyC += favoriteList[resultIndexC[g]] + ' ';
+ }
+
+ document.getElementById("mainOutput1").innerHTML = result[0];
+ document.getElementById("mainOutput2").innerHTML = result[1];
+ document.getElementById("mainOutput3").innerHTML = result[2];
+ document.getElementById("mainOutput4").innerHTML = frequencyA;
+ document.getElementById("mainOutput5").innerHTML = frequencyB;
+ document.getElementById("mainOutput6").innerHTML = frequencyC;
+}
+
+</script>
+<body>
+<h1>Values offset must match a segment</h1>
+<div style="margin:auto">
+<p>Select main axis</p>
+<form>
+<select id="mainAxis">
+ <option value = "1">885</option>
+ <option value = "2">893</option>
+ <option value = "3">903</option>
+ <option value = "4">913</option>
+ <option value = "5">919</option>
+ <option value = "6">925</option>
+ <option value = "7">935</option>
+ <option value = "8">943</option>
+ <option value = "9">951</option>
+ <option value = "10">959</option>
+ <option value = "11">977</option>
+ <option value = "12">985</option>
+ <option value = "13">995</option>
+ <option value = "14">1007</option>
+ <option value = "15">1029</option>
+ <option value = "16">1057</option>
+ <option value = "17">1073</option>
+</select>
+<br>
+<input type="button" value="Calculate" onClick="init()"></input>
+<p>Input ratio</p>
+<input type="text" id="ratio1"></input>
+<input type="text" id="ratio2"></input>
+</form>
+<table><tr>
+<td>Quality 1</td>
+<td><p id="mainOutput1"></p></td>
+</tr><tr>
+<td>Quality 2</td>
+<td><p id="mainOutput2"></p></td>
+</tr><tr>
+<td>Quality 3</td>
+<td>
+<p id="mainOutput3"></p></td>
+</tr><tr>
+<td>Offset 1</td>
+<td><p id="mainOutput4"></p></td>
+</tr><tr>
+<td>Offset 2</td>
+<td><p id="mainOutput5"></p></td>
+</tr><tr>
+<td>Axis</td>
+<td><p id="mainOutput6"></p></td>
+</tr></table>
+</div>
+</body>
+</html>
