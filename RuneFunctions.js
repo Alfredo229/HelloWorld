@@ -32,34 +32,6 @@ function changeFreq(){
  }
 }
 
-var line = new Array(
-"Wealth is a comfort to all men yet must every man bestow it freely if he wish to gain honour in the sight of the Lord.",
-"The aurochs is proud and has great horns it is a very savage beast and fights with its horns a great ranger of the moors, it is a creature of mettle.",
-"The thorn is exceedingly sharp an evil thing for any knight to touch uncommonly severe on all who sit among them. ",
-"The mouth is the source of all language a pillar of wisdom and a comfort to wise men a blessing and a joy to every knight. ",
-"Riding seems easy to every warrior while he is indoors and very courageous to him who traverses the high-roads on the back of a stout horse. ",
-"The torch is known to every living man by its pale, bright flame it always burns where princes sit within. ",
-"Generosity brings credit and honour, which support one's dignity it furnishes help and subsistence to all broken men who are devoid of aught else. ",
-"Bliss he enjoys who knows not suffering, sorrow nor anxiety and has prosperity and happiness and a good enough house. ",
-"Hail is the whitest of grain it is whirled from the vault of heaven and is tossed about by gusts of wind and then it melts into water. ",
-"Trouble is oppressive to the heart yet often it proves a source of help and salvation to the children of men, to everyone who heeds it betimes. ",
-"Ice is very cold and immeasurably slippery it glistens as clear as glass and most like to gems it is a floor wrought by the frost, fair to look upon. ",
-"Summer is a joy to men, when God, the holy King of Heaven suffers the earth to bring forth shining fruits for rich and poor alike. ",
-"The yew is a tree with rough bark hard and fast in the earth, supported by its roots a guardian of flame and a joy upon an estate. ",
-"Peorth is a source of recreation and amusement to the great where warriors sit blithely together in the banqueting-hall. ",
-"The Eolh-sedge is mostly to be found in a marsh it grows in the water and makes a ghastly wound covering with blood every warrior who touches it. ",
-"The sun is ever a joy in the hopes of seafarers when they journey away over the fishes' bath until the courser of the deep bears them to land. ",
-"Tiw is a guiding star; well does it keep faith with princes it is ever on its course over the mists of night and never fails. ",
-"The poplar bears no fruit; yet without seed it brings forth suckers for it is generated from its leaves Splendid are its branches and gloriously adorned its lofty crown which reaches to the skies. ",
-"The horse is a joy to princes in the presence of warriors A steed in the pride of its hoofs when rich men on horseback bandy words about it and it is ever a source of comfort to the restless. ",
-"The joyous man is dear to his kinsmen  yet every man is doomed to fail his fellow since the Lord by his decree will commit the vile carrion to the earth. ",
-"The ocean seems interminable to men if they venture on the rolling bark and the waves of the sea terrify them and the courser of the deep heed not its bridle. ",
-"Ing was first seen by men among the East-Danes till, followed by his chariot he departed eastwards over the waves So the Heardingas named the hero. ",
-"Day, the glorious light of the Creator, is sent by the Lord it is beloved of men, a source of hope and happiness to rich and poor and of service to all. ",
-"An estate is very dear to every man if he can enjoy there in his house whatever is right and proper in constant prosperity. ",
-"This random shit"
-);
-
 /*
 var description = new Array(
 "Fehu: Decision. Intellectual thinking and reasoning about a course of action to be determined.",
@@ -402,3 +374,31 @@ var name2 = new Array(
 "Ing",
 "Daeg",
 "Odal");
+
+var line = new Array(
+"Wealth is a comfort to all men yet must every man bestow it freely if he wish to gain honour in the sight of the Lord.",
+"The aurochs is proud and has great horns it is a very savage beast and fights with its horns a great ranger of the moors, it is a creature of mettle.",
+"The thorn is exceedingly sharp an evil thing for any knight to touch uncommonly severe on all who sit among them. ",
+"The mouth is the source of all language a pillar of wisdom and a comfort to wise men a blessing and a joy to every knight. ",
+"Riding seems easy to every warrior while he is indoors and very courageous to him who traverses the high-roads on the back of a stout horse. ",
+"The torch is known to every living man by its pale, bright flame it always burns where princes sit within. ",
+"Generosity brings credit and honour, which support one's dignity it furnishes help and subsistence to all broken men who are devoid of aught else. ",
+"Bliss he enjoys who knows not suffering, sorrow nor anxiety and has prosperity and happiness and a good enough house. ",
+"Hail is the whitest of grain it is whirled from the vault of heaven and is tossed about by gusts of wind and then it melts into water. ",
+"Trouble is oppressive to the heart yet often it proves a source of help and salvation to the children of men, to everyone who heeds it betimes. ",
+"Ice is very cold and immeasurably slippery it glistens as clear as glass and most like to gems it is a floor wrought by the frost, fair to look upon. ",
+"Summer is a joy to men, when God, the holy King of Heaven suffers the earth to bring forth shining fruits for rich and poor alike. ",
+"The yew is a tree with rough bark hard and fast in the earth, supported by its roots a guardian of flame and a joy upon an estate. ",
+"Peorth is a source of recreation and amusement to the great where warriors sit blithely together in the banqueting-hall. ",
+"The Eolh-sedge is mostly to be found in a marsh it grows in the water and makes a ghastly wound covering with blood every warrior who touches it. ",
+"The sun is ever a joy in the hopes of seafarers when they journey away over the fishes' bath until the courser of the deep bears them to land. ",
+"Tiw is a guiding star; well does it keep faith with princes it is ever on its course over the mists of night and never fails. ",
+"The poplar bears no fruit; yet without seed it brings forth suckers for it is generated from its leaves Splendid are its branches and gloriously adorned its lofty crown which reaches to the skies. ",
+"The horse is a joy to princes in the presence of warriors A steed in the pride of its hoofs when rich men on horseback bandy words about it and it is ever a source of comfort to the restless. ",
+"The joyous man is dear to his kinsmen  yet every man is doomed to fail his fellow since the Lord by his decree will commit the vile carrion to the earth. ",
+"The ocean seems interminable to men if they venture on the rolling bark and the waves of the sea terrify them and the courser of the deep heed not its bridle. ",
+"Ing was first seen by men among the East-Danes till, followed by his chariot he departed eastwards over the waves So the Heardingas named the hero. ",
+"Day, the glorious light of the Creator, is sent by the Lord it is beloved of men, a source of hope and happiness to rich and poor and of service to all. ",
+"An estate is very dear to every man if he can enjoy there in his house whatever is right and proper in constant prosperity. ",
+"This random shit"
+);
