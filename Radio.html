@@ -1,0 +1,186 @@
+<html>
+<head>
+<title>FM scan</title>
+
+
+
+<script>
+frequencyList = new Array(885,893,903,913,919,925,935,943,951,959,977,985,995,1007,1015,1023,1033,1051,1057,1063,1073);
+favoriteList = new Array(1057,925,985,977,1073,959,1007,1015,951,885,893,1023,1033,903,913,919,935,995,1051,1063,943);
+
+/*++++++++++++++++++
+LOOP F
+Main process index. Scans the individual mapped dots on FM band.
+Scans the favorite list decreasingly, finishing the sweep with heavier weights at the begining.
+
+LOOP I
+Calculates a first segment between the main sweep, and the first segment sweep.
+Applies the factor to the current segment. Using the ratio weight.
+
+There are only 2 lengths, the order doesn't matter.
+It will do both. The first segment and the second segment. The ratio will swap itself
+
+LOOP X
+Calculates a second segment between the main sweep and the second segment sweep.
+Applies the factor to the current segment. Using one of the ratio weight.
+
+Measures the factored offsets to the input ratio's weight.
+
+Smaller offsets are more precise.
+Commits if the precision is better. And on the same side of the main sweep index.
+
+++++++++++++++++++*/
+
+//************Might not need the 2nd instance of LOOP I and LOOP X
+
+//===============================
+function init(){
+	//#######
+	//Resets variables
+		result = new Array(99,99,99);
+		resultIndexA = new Array(0,0,0);
+		resultIndexB = new Array(0,0,0);
+		resultIndexC = new Array(0,0,0);
+		testString = '';
+	//#######
+	//offset between the calculated ratio and the intended ratio
+		myBrains = 0; 
+		mySeek = 0;
+		pointA = 0;
+//		pointA = Number(document.getElementById("mainAxis").value)-1;
+	//#######
+	//
+		theInput1 = Math.abs(Number(document.getElementById("ratio1").value));
+		theInput2 = Math.abs(Number(document.getElementById("ratio2").value));
+		theRatio1 = 1 / theInput1;
+		theRatio2 = 1 / theInput2;
+	//#######
+	//*****************
+	//*****************LOOP F
+	//*****************
+	for(f=favoriteList.length; f >=0 ; f--){
+		pointA = f;
+		//#######
+		//*********************
+		//*********************LOOP I
+		//*********************
+		//first sweep
+		for(i=0; i < frequencyList.length; i++){
+			offsetA = Math.abs((favoriteList[pointA] - frequencyList[i]));
+			targetOffset = offsetA * theRatio1;
+			//**********************
+			//**********************LOOP X
+			//**********************
+			for(x=0 ;x < frequencyList.length ;x++){
+				if(i != x){
+					offsetB = Math.abs(favoriteList[pointA] - frequencyList[x]);
+					offsetB *= theRatio2;
+					calculatedOffset = Math.abs(targetOffset - offsetB);
+				}
+				if(favoriteList[pointA] < frequencyList[i] && favoriteList[pointA] < frequencyList[x])
+					validate();
+			}
+		}
+		gg=favoriteList.length;
+		//#######
+		//*********************
+		//*********************LOOP I
+		//*********************
+		for(i = 0 ; i < frequencyList.length; i++){
+		offsetA = Math.abs((favoriteList[pointA] - frequencyList[i]));
+		targetOffset = offsetA * theRatio1;
+			//**********************
+			//**********************LOOP X
+			//**********************
+				for(x=0 ;x < frequencyList.length ;x++){
+				//++++++++++++++++++
+				//
+				//++++++++++++++++++
+				if(i != x){
+					offsetB = Math.abs(favoriteList[pointA] - frequencyList[x]);
+					offsetB *= theRatio2;
+					calculatedOffset = Math.abs(targetOffset - offsetB);
+					//#######
+					//Validates results are on the same side ofthe main scan pointer
+					if(favoriteList[pointA] > frequencyList[i] && favoriteList[pointA] > frequencyList[x])
+						validate();
+				}
+			}
+		}
+	}
+}
+
+//===============================
+/*Sweeps the 5 result array and pushes down if there's a match
+needs to swipe the array and keep pushing the higher numbers until... no
+Start at the best result then push if it finds something higher (golf)*/
+function validate(){
+	if(calculatedOffset <= result[0]){
+		//moves the object up one on the precision scale
+		for(g=2; g>0; g--){
+			result[g] = result[g-1]
+			resultIndexA[g] = resultIndexA[g-1];
+			resultIndexB[g] = resultIndexB[g-1];
+			resultIndexC[g] = resultIndexC[g-1];
+		}
+
+		//assigns the new value
+		result[0] = calculatedOffset;
+		resultIndexA[0] = x;
+		resultIndexB[0] = i;
+		resultIndexC[0] = pointA;
+	}
+
+//Updates the results
+resultString = '';
+frequencyA = '';
+frequencyB = '';
+frequencyC = '';
+for(g=0; g<3; g++){
+	 resultString += result[g] + ' ';
+	 frequencyA += frequencyList[resultIndexA[g]] + ' ';
+	 frequencyB += frequencyList[resultIndexB[g]] + ' ';
+	 frequencyC += favoriteList[resultIndexC[g]] + ' ';
+	}
+
+	document.getElementById("mainOutput1").innerHTML = result[0];
+	document.getElementById("mainOutput2").innerHTML = result[1];
+	document.getElementById("mainOutput3").innerHTML = result[2];
+	document.getElementById("mainOutput4").innerHTML = frequencyA;
+	document.getElementById("mainOutput5").innerHTML = frequencyB;
+	document.getElementById("mainOutput6").innerHTML = frequencyC;
+}</script>
+
+
+<body>
+<div style="margin:auto">
+<form>
+<p>Input ratio</p>
+<input type="text" id="ratio1"></input>
+<input type="text" id="ratio2"></input>
+<br>
+<input type="button" value="Calculate" onClick="init()"></input>
+</form>
+<table><tr>
+<td>Quality 1</td>
+<td><p id="mainOutput1"></p></td>
+</tr><tr>
+<td>Quality 2</td>
+<td><p id="mainOutput2"></p></td>
+</tr><tr>
+<td>Quality 3</td>
+<td>
+<p id="mainOutput3"></p></td>
+</tr><tr>
+<td>Offset 1</td>
+<td><p id="mainOutput4"></p></td>
+</tr><tr>
+<td>Offset 2</td>
+<td><p id="mainOutput5"></p></td>
+</tr><tr>
+<td>Axis</td>
+<td><p id="mainOutput6"></p></td>
+</tr></table>
+</div>
+</body>
+</html>
