@@ -1,0 +1,61 @@
+/*var path = new Array("frey","ur","thorn","os","rad","ken","gyfu","wyn",
+                 "hagel","nyd","is","jera","tree","pethro","sedge","sowilo",
+                 "tyr","berkano","eh","man","lagu","ing","daeg","odal");
+*/
+
+function changeFreq(){
+ switch(document.getElementById("dialog11").value){
+  case"0":
+   document.getElementById("field10").value="1000";
+   document.getElementById("field20").value=Math.round(225/88*1000);
+   break;
+  case"1":
+   document.getElementById("field10").value="1000";
+   document.getElementById("field20").value=Math.round(365/225*1000);
+   break;
+  case"2":
+   document.getElementById("field10").value="1000";
+   document.getElementById("field20").value=Math.round(687/365*1000);
+   break;
+  case"3":
+   document.getElementById("field10").value="1000";
+   document.getElementById("field20").value=Math.round(4332/687*1000);
+   break;
+  case"4":
+   document.getElementById("field10").value="1000";
+   document.getElementById("field20").value=Math.round(10759/4332*1000);
+   break;
+  case"5":
+   document.getElementById("field10").value="1000";
+   document.getElementById("field20").value=Math.round(27321/24000*1000);
+   break;
+ }
+}
+
+
+
+/*var name2 = new Array(
+"Frey: Honor",
+"Ur: Might",
+"Thorn: Reprimand",
+"Os: Reward",
+"Rad: Work",
+"Ken: Rest",
+"Gyfu: Problem",
+"Wyn: Solution",
+"Hagel: Amateur",
+"Nyd: Skilled",
+"Is: Defeat",
+"Jera: Victory",
+"Eoh: Pay Day",
+"Pethro: Shopping",
+"Eloh: Dangerous",
+"Sigel: Safe",
+"Tyr: Truth",
+"Birch: Fiction",
+"Eh: Concert",
+"Man: Birthday",
+"Lagu: Upset",
+"Ing: Controlled",
+"Daeg: Public",
+"Odal: Private");*/

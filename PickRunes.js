@@ -1,6 +1,5 @@
 function PickRune(MyString){
 
-<<<<<<< HEAD
 name2 = new Array(
 "Frey: Honor",
 "Ur: Might",
@@ -31,8 +30,6 @@ name2 = new Array(
                    "Hagel","Nyd","Isa","Jera","Eoh","Pethro","Eloh","Sigel",
                    "Tyr","Birch","Eh","Man","Lagu","Ing","Daeg","Odal");
 
-=======
->>>>>>> c00ec6ef56eefe79452a8a4a23764095b4a90b45
  switch(MyString){
   case "S":
    myPath = "Runes\\";
@@ -80,7 +77,7 @@ name2 = new Array(
 
   case "P11":
    myPath = "Pictures10\\";
-<<<<<<< HEAD
+
 name2 = new Array(
 "Frey: Honor",
 "Ur: Might",
@@ -106,26 +103,20 @@ name2 = new Array(
 "Ing: Controlled",
 "Daeg: Public",
 "Odal: Private");
-=======
->>>>>>> c00ec6ef56eefe79452a8a4a23764095b4a90b45
    break;
 
   case "P12":
    myPath = "Pictures11\\";
-<<<<<<< HEAD
    name2 = new Array("Intellectual","Physical","Different","Coherent","Active","Passive","Complex","Simple",
    "Disorganised","Controlled","Calculated","Spontanious","Selling","Buying","Defensive","Optimist",
    "Loyal","Artist","Public Service","Private Task","Accident","Tradition","Job","Weekend");
-=======
    name2 = new Array("Evaluation","Execution","Caution","Approval","Simple effort","Complex idea","Worried",
 "Peace","Out of control","Method","Sterile","Money","Valuable","Disposable","Toxic","Nutritious",
 "Procedure","Off duty","Work","Stopping","Responsability","Performing","Customer support","Self served");
->>>>>>> c00ec6ef56eefe79452a8a4a23764095b4a90b45
    break;
 
   case "P13":
    myPath = "Pictures12\\";
-<<<<<<< HEAD
    name2 = new Array(
    "FREY: READING THE MENU",
    "UR: WASHING DISHES",
@@ -183,26 +174,21 @@ name2 = new Array ("FREY: PASSPORT",
 "ING: EARPLUGS",
 "DAEG: COUPLE",
 "ODAL: WARDROBE");
-=======
    name2 = new Array("Buy","Create","Conflict","Harmony","Real","Theory","Poor","Rich","Tension","Precision","Dead","Alive","Recieve","Give","Accident","Safe","Indoors","Outdoors","Alone","Team","Worn","New","Public","Territory");
    break;
 
   case "P14":
    myPath = "Pictures13\\";
->>>>>>> c00ec6ef56eefe79452a8a4a23764095b4a90b45
    break;
 
   case "P15":
    myPath = "Pictures14\\";
-<<<<<<< HEAD
    name2 = new Array("Frey","Ur","Thorn","Os","Rad","Ken","Gyfu","Wyn",
                      "Hagel","Nyd","Isa","Jera","Eoh","Pethro","Eloh","Sigel",
                      "Tyr","Birch","Eh","Man","Lagu","Ing","Daeg","Odal");
-=======
    name2 = new Array("Sedentary","Active","Disorder","Order","Traveling","Indoors","Work","Peace",
                      "Recursive","Progress","Danger","Healing","Harvesting","Using","Field Work","Safe",
                      "Mass Produced","Unique","Work in Progress","Clean and Proper","Post Traumatic Syndrom","Decision Layer","Public","Private");
->>>>>>> c00ec6ef56eefe79452a8a4a23764095b4a90b45
    break;
 
   case "P16":
