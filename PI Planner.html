@@ -139,14 +139,14 @@
 </script>
 </head><body>
 
-<h1>Planet Commodity Dependancies</h1>
+<h1>Planet Commodity Dependencies</h1>
 
 <div style="float:bottom">
 <h2>Tier 1 component</h2>
 </div>
 <div style="float:bottom">
 <form>
-<select id="T1" onBlur = "updateT1()">
+<select id="T1">
   <option value="0">Bacteria</option>
   <option value="1">Biofuels</option>
   <option value="2">Biomass</option>
@@ -163,7 +163,7 @@
   <option value="13">Toxic Metals</option>
   <option value="14">Water</option>
 </select>
-<input type="button" value="Click"></input>
+<input type="button" value="Click" onClick = "updateT1()"></input>
 </form>
 </div>
 
@@ -196,7 +196,7 @@
 </div>
 
 <form>
-<select id="T2" onBlur = "updateT2()">
+<select id="T2">
   <option value="0">Biocells</option>
   <option value="1">Construction Blocks</option>
   <option value="2">Consumer Electronics</option>
@@ -222,7 +222,7 @@
   <option value="22">Viral Agent</option>
   <option value="23">Water-Cooled CPU</option>
 </select>
-<input type="button" value="Click"></input>
+<input type="button" value="Click" onClick = "updateT2()"></input>
 </form>
 
 <table><tr>
@@ -236,7 +236,7 @@
 </div>
 
 <form>
-<select id="T3" onBlur = "updateT3()">
+<select id="T3">
 	<option value="0">Biotech Research Reports</option>
 	<option value="1">Camera Drones</option>
 	<option value="2">Condensates</option>
@@ -259,7 +259,7 @@
 	<option value="19">Ukomi Superconductors</option>
 	<option value="20">Vaccines</option>
 </select>
-<input type="button" value="Click"></input>
+<input type="button" value="Click" onClick = "updateT3()"></input>
 
 <table><tr>
 <td><p id="T3field0"></p>
@@ -274,7 +274,7 @@
 </div>
 
 <form>
-<select id="T4" onBlur = "updateT4()">
+<select id="T4">
 	<option value="0">Broadcast Node</option>
 	<option value="1">Integrity Response Drones</option>
 	<option value="2">Nano-Factory</option>
@@ -284,7 +284,7 @@
 	<option value="6">Sterile Conduits</option>
 	<option value="7">Wetware Mainframe</option>
 </select>
-<input type="button" value="Click"></input>
+<input type="button" value="Click" onClick = "updateT4()"></input>
 
 <table><tr>
 <td><p id="T4field0"></p>
