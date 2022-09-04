@@ -17,7 +17,7 @@ function start(){
 }
 
 function loop(){
-	ID = setTimeout(loop,666);
+	ID = setTimeout(loop,1000);
 	myFiles[playing].pause();
 	playing = Math.floor(Math.random() * 16)
 	myFiles[playing].play();
