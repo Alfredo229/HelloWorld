@@ -3,8 +3,9 @@
 <title>Random Binary Chords</title>
 <script>
 ID = 0;
-playing = 0;
+playing = new Audio();
 running = 0;
+playingId = 0;
 
 myFiles = new Array();
 for(i=0; i<16; i++){
@@ -22,10 +23,10 @@ function start(){
 
 function loop(){
 	if(running == 1)
-		ID = setTimeout(loop,1000);
-	myFiles[playing].pause();
-	playing = Math.floor(Math.random() * 16)
-	myFiles[playing].play();
+		ID = setTimeout(loop,875);
+	playing.pause();
+	playingId = Math.floor(Math.random() * 16);
+	playing.src = myFiles[playingId].src;
 	playing.play();
 }
 
