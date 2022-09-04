@@ -4,6 +4,7 @@
 <script>
 ID = 0;
 playing = 0;
+running = 0;
 
 myFiles = new Array();
 for(i=0; i<16; i++){
@@ -13,11 +14,15 @@ for(i=0; i<16; i++){
 }
 
 function start(){
-	loop();
+	if(running != 1){
+		running = 1;
+		loop();
+	}
 }
 
 function loop(){
-	ID = setTimeout(loop,1000);
+	if(running == 1)
+		ID = setTimeout(loop,1000);
 	myFiles[playing].pause();
 	playing = Math.floor(Math.random() * 16)
 	myFiles[playing].play();
@@ -25,7 +30,10 @@ function loop(){
 }
 
 function stop(){
-	clearTimeout(ID);
+	if(running == 1){
+		running = 0;
+		clearTimeout(ID);
+	}
 }
 
 </script>
