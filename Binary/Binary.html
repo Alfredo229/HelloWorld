@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Random Binary Chords</title>
+<script>
+ID = 0;
+playing = 0;
+
+myFiles = new Array();
+for(i=0; i<16; i++){
+	myFiles[i] = new Audio();
+	myFiles[i].src = i+".mp3";
+	myFiles[i].load();
+}
+
+function start(){
+	loop();
+}
+
+function loop(){
+	ID = setTimeout(loop,250);
+	myFiles[playing].pause();
+	playing = Math.floor(Math.random() * 16)
+	myFiles[playing].play();
+	playing.play();
+}
+
+function stop(){
+	clearTimeout(ID);
+}
+
+</script>
+
+<body>
+<h1>Random Binary Chords</h1><br>
+<form>
+<input type="button" value="Start" onClick="start()"></input>
+<input type="button" value="Stop" onClick="stop()"></input>
+</body>
+</html>
