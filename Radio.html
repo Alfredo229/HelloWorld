@@ -6,8 +6,8 @@
 
 <script>
 //frequencyList = new Array(1057,925,985,977,1073,959,1007,1015,951,885,893,913,919,935,995,1063,943);
-frequencyList = new Array(885,893,913,913,925,935,943,951,959,969,977,985,995,1007,1015,1057,1063,1073);
-favoriteList = new Array(985,969,925,1057,1073,885,893,913,913,935,943,951,959,977,995,1007,1015,1063);
+frequencyList = new Array(885,893,913,925,935,943,951,959,969,977,985,995,1007,1015,1057,1063,1073);
+favoriteList = new Array(985,969,925,1057,1073,885,893,913,935,943,951,959,977,995,1007,1015,1063);
 
 /*++++++++++++++++++
 LOOP F
@@ -67,21 +67,26 @@ function init(){
 		//*********************
 		//first sweep
 		for(i=0; i < frequencyList.length; i++){
-			offsetA = Math.abs((favoriteList[pointA] - frequencyList[i]));
-			targetOffset = offsetA * theRatio1;
-			//**********************
-			//**********************LOOP X
-			//**********************
-			for(x=0 ;x < frequencyList.length ;x++){
-				if(i != x){
-					offsetB = Math.abs(favoriteList[pointA] - frequencyList[x]);
-					offsetB *= theRatio2;
-					calculatedOffset = Math.abs(targetOffset - offsetB);
+			if(i != pointA){
+				offsetA = Math.abs((favoriteList[pointA] - frequencyList[i]));
+				targetOffset = offsetA * theRatio1;
+				//**********************
+				//**********************LOOP X
+				//**********************
+				for(x=0 ;x < frequencyList.length ;x++){
+					if(i != x && i != pointA){
+						offsetB = Math.abs(favoriteList[pointA] - frequencyList[x]);
+						offsetB *= theRatio2;
+						calculatedOffset = Math.abs(targetOffset - offsetB);
+						if((favoriteList[pointA] < frequencyList[i]) && (favoriteList[pointA] < frequencyList[x]))
+							validate();
+						if((favoriteList[pointA] > frequencyList[i]) && (favoriteList[pointA] > frequencyList[x]))
+							validate();
+					}
 				}
-				if(favoriteList[pointA] < frequencyList[i] && favoriteList[pointA] < frequencyList[x])
-					validate();
 			}
 		}
+		/*
 		gg=favoriteList.length;
 		//#######
 		//*********************
@@ -103,11 +108,9 @@ function init(){
 					calculatedOffset = Math.abs(targetOffset - offsetB);
 					//#######
 					//Validates results are on the same side ofthe main scan pointer
-					if(favoriteList[pointA] > frequencyList[i] && favoriteList[pointA] > frequencyList[x])
-						validate();
 				}
 			}
-		}
+		}*/
 	}
 }
 
