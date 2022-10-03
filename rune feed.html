@@ -75,7 +75,7 @@
 <table><form><tr>
 
 <td><input type="button" value="Ready" onClick="initA()"></td>
-
+<td><input type="button" value="Stop" onClick="stop_run()"></td>
 <td><input type="button" value="Clear" onClick="clearIt()"></td>
 
 </tr></form></table>
@@ -267,6 +267,7 @@ function clearIt(){
 }
 
 function stop_run(){
+ running = 0;
  window.clearTimeout(ID1);
  window.clearTimeout(ID2);
  window.clearTimeout(ID3);
