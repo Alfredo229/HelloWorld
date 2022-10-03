@@ -66,21 +66,26 @@ function init(){
 		//*********************
 		//first sweep
 		for(i=0; i < frequencyList.length; i++){
-			offsetA = Math.abs((favoriteList[pointA] - frequencyList[i]));
-			targetOffset = offsetA * theRatio1;
-			//**********************
-			//**********************LOOP X
-			//**********************
-			for(x=0 ;x < frequencyList.length ;x++){
-				if(i != x){
-					offsetB = Math.abs(favoriteList[pointA] - frequencyList[x]);
-					offsetB *= theRatio2;
-					calculatedOffset = Math.abs(targetOffset - offsetB);
+			if(i != pointA){
+				offsetA = Math.abs((favoriteList[pointA] - frequencyList[i]));
+				targetOffset = offsetA * theRatio1;
+				//**********************
+				//**********************LOOP X
+				//**********************
+				for(x=0 ;x < frequencyList.length ;x++){
+					if(i != x && i != pointA){
+						offsetB = Math.abs(favoriteList[pointA] - frequencyList[x]);
+						offsetB *= theRatio2;
+						calculatedOffset = Math.abs(targetOffset - offsetB);
+						if((favoriteList[pointA] < frequencyList[i]) && (favoriteList[pointA] < frequencyList[x]))
+							validate();
+						if((favoriteList[pointA] > frequencyList[i]) && (favoriteList[pointA] > frequencyList[x]))
+							validate();
+					}
 				}
-				if(favoriteList[pointA] < frequencyList[i] && favoriteList[pointA] < frequencyList[x])
-					validate();
 			}
 		}
+		/*
 		gg=favoriteList.length;
 		//#######
 		//*********************
@@ -102,11 +107,9 @@ function init(){
 					calculatedOffset = Math.abs(targetOffset - offsetB);
 					//#######
 					//Validates results are on the same side ofthe main scan pointer
-					if(favoriteList[pointA] > frequencyList[i] && favoriteList[pointA] > frequencyList[x])
-						validate();
 				}
 			}
-		}
+		}*/
 	}
 }
 
