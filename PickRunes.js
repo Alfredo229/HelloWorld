@@ -77,32 +77,6 @@ name2 = new Array(
 
   case "P11":
    myPath = "Pictures10\\";
-
-name2 = new Array(
-"Frey: Honor",
-"Ur: Might",
-"Thorn: Reprimand",
-"Os: Reward",
-"Rad: Work",
-"Ken: Rest",
-"Gyfu: Problem",
-"Wyn: Solution",
-"Hagel: Amateur",
-"Nyd: Skilled",
-"Is: Defeat",
-"Jera: Victory",
-"Eoh: Pay Day",
-"Pethro: Shopping",
-"Eloh: Dangerous",
-"Sigel: Safe",
-"Tyr: Truth",
-"Birch: Fiction",
-"Eh: Concert",
-"Man: Birthday",
-"Lagu: Upset",
-"Ing: Controlled",
-"Daeg: Public",
-"Odal: Private");
    break;
 
   case "P12":
@@ -269,7 +243,4 @@ break;
    alert("other");
   break;
  }
- name2 = new Array("Frey","Ur","Thorn","Os","Rad","Ken","Gyfu","Wyn",
-                   "Hagel","Nyd","Isa","Jera","Eoh","Pethro","Eloh","Sigel",
-                   "Tyr","Birch","Eh","Man","Lagu","Ing","Daeg","Odal");
 }
