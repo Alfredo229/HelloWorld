@@ -81,12 +81,6 @@ name2 = new Array(
 
   case "P12":
    myPath = "Pictures11\\";
-   name2 = new Array("Intellectual","Physical","Different","Coherent","Active","Passive","Complex","Simple",
-   "Disorganised","Controlled","Calculated","Spontanious","Selling","Buying","Defensive","Optimist",
-   "Loyal","Artist","Public Service","Private Task","Accident","Tradition","Job","Weekend");
-   name2 = new Array("Evaluation","Execution","Caution","Approval","Simple effort","Complex idea","Worried",
-"Peace","Out of control","Method","Sterile","Money","Valuable","Disposable","Toxic","Nutritious",
-"Procedure","Off duty","Work","Stopping","Responsability","Performing","Customer support","Self served");
    break;
 
   case "P13":
