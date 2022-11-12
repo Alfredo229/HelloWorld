@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>Digital light cycles</title>
+<script>
+
+INCREMENT = 10;
+
+running = 0;
+ID1 = 0;
+ID2 = 0;
+
+length1 = 1000;
+length2 = 1000;
+
+color1 = 0;
+color2 = 0;
+
+count1 = 0;
+count2 = 0;
+
+polarity1 = 0;
+polarity2 = 0;
+
+hexTag1 = 0;
+hexTag2 = 0;
+
+defaultStyle = "width:50%;height:70%;float:left;background-color:";
+//	document.getElementById("debug1").innerHTML = hexTag1;
+
+function Stop(){
+	running = 0;
+	window.clearTimeout(ID1);
+	window.clearTimeout(ID2);
+}
+
+function Start(){
+	length1 = Number(document.getElementById("field10").value);
+	length2 = Number(document.getElementById("field20").value);
+	if(running == 0){
+		runLoop1();
+		runLoop2();
+	}
+}
+
+function runLoop1(){
+	ID1 = setTimeout("runLoop1();",length1);
+	document.getElementById("window1").style = defaultStyle + color1;
+	if(polarity1 == 0){
+		count1 += INCREMENT;
+		if(count1 > 255){
+			count1 = 255;
+			polarity1 = 1;
+		}
+	}else{
+		count1 -= INCREMENT;
+		if(count1 < 0){
+			count1 = 0;
+			polarity1 = 0;
+		}
+	}
+	hexTag1 = String(count1.toString(16));
+	if(hexTag1.length == 1)
+		hexTag1 = "0" + hexTag1;
+	color1 = "#" + hexTag1 + hexTag1 + hexTag1;
+}
+
+function runLoop2(){
+	ID2 = setTimeout("runLoop2();",length2);
+	document.getElementById("window2").style = defaultStyle + color2;
+	if(polarity2 == 0){
+		count2 += INCREMENT;
+		if(count2 > 255){
+			count2 = 255;
+			polarity2 = 1;
+		}
+	}else{
+		count2 -= INCREMENT;
+		if(count2 < 0){
+			count2 = 0;
+			polarity2 = 0;
+		}
+	}
+	hexTag2 = String(count2.toString(16));
+	if(hexTag2.length == 1)
+		hexTag2 = "0" + hexTag2;
+	color2 = "#" + hexTag2 + hexTag2 + hexTag2;
+//	alert(1230);
+}
+
+</script>
+</head>
+<body>
+
+<div style="width:100%;height:10%;background-color:black;color:red">
+<h1>Input 2 cycle lengths in ms. Each will determine the loop length of each side of the screen.</h1>
+</div>
+
+<div style="width:100%;height:15%;background-color:black" id="myTest">
+<p>this is a atest</p>
+<table>
+<tr><td>
+<input type="text" value="1000" id="field10">
+</td></tr>
+<tr><td>
+<input type="text" value="1000" id="field20">
+</td></tr>
+<tr><td>
+<input type="button" value="Start" onClick="Start()">
+</td></tr>
+<tr><td>
+<input type="button" value="Stop" onClick="Stop()">
+</td></tr>
+</table>
+</div>
+
+<div style="width:50%;height:70%;background-color:blue;float:left" id="window1">
+</div>
+
+<div style="width:50%;height:70%;background-color:red;float:left" id="window2">
+</div>
+
+</body>
+</html>
