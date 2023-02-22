@@ -330,12 +330,9 @@ function addDescription(myRune){
 }
 
 function move_index(match){
-// alert(max_buffered);
- for(i = 0; i < max_buffered-1; i++)
-//alert(i);
-  Current_Rune[i]=Current_Rune[i+1];
- Current_Rune[max_buffered-1] = match;
-// alert(Current_Rune[0]+' '+Current_Rune[1]+' '+Current_Rune[2]);
+	for(i = max_buffered-1; i >= 0; i--)
+		Current_Rune[i]=Current_Rune[i-1];
+	Current_Rune[0] = match;
 }
 
 /*
